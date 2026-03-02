@@ -11,4 +11,31 @@ output:
 
 ## Project thoughts
 
-I am interested in exploring data related to statistics about literacy and education across different areas and community types, and how they compare to voting and elections. I think it would be interesting to study the correlation between literacy levels and political party affiliation/candidate preference. 
+I am interested in exploring data related to statistics about literacy and education across different areas and community types, and how they compare to voting and elections. I think it would be interesting to study the correlation between literacy levels and political party affiliation/candidate preference.
+
+## Research Question and Hypothesis
+
+Question to be researched and studied in the data: Did higher education levels in a county lead to more support for Democratic candidates in the 2020 Presidential Elections?
+
+My hypothesis: I hypothesize that counties with more adults holding a bachelor’s degree or higher will vote more for Democrats, because education is typically linked to political engagement and more liberal social views. 
+
+## Description of Data Set and Research Question (paragraph for milestone 2)
+
+For my project, I will use county level data from the U.S. Census and 2020 presidential election results. My research question is: “Did higher education levels in a county lead to more support for Democratic candidates in the 2020 Presidential Elections?” I hypothesize that counties with more adults holding a bachelor’s degree or higher will vote more for Democrats, because education is linked to political engagement and more liberal social views. My main explanatory variable will be education level, measured as the percentage of adults in a county with a bachelor’s degree or higher. This will vary across counties and states, allowing us to observe how variation impacts the dependent/outcome variable. The outcome variable will be Democratic vote share, which is measured as the percentage of total votes cast for the Democratic candidate in each county. If the patterns in the data show a positive relationship between higher education and democratic vote, my hypothesis is supported. However, if the relationship is zero or negative, rather showing a correlation between Republican vote and education, it is not supported.
+
+
+## Datasets being used for project and code to load it
+
+For my project, I am using a GitHub dataset that I have loaded under "election_data" that contains election results by county from the 2020 election cycle. To understand education and literacy levels, I will use the "tidycensus" package that has census and education data by county.  
+
+```{r Loading the data}
+install.packages("tidycensus")
+library(tidycensus)
+library(readr)
+library(dplyr)
+
+election_data <- read_csv("https://raw.githubusercontent.com/tonmcg/US_County_Level_Election_Results_08-20/master/2020_US_County_Level_Presidential_Results.csv")
+
+head(election_data)
+```
+
