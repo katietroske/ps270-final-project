@@ -1546,7 +1546,32 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <div class="d-article">
 <h2 id="project-thoughts">Project thoughts</h2>
 <p>I am interested in exploring data related to statistics about literacy and education across different areas and community types, and how they compare to voting and elections. I think it would be interesting to study the correlation between literacy levels and political party affiliation/candidate preference.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<h2 id="research-question-and-hypothesis">Research Question and Hypothesis</h2>
+<p>Question to be researched and studied in the data: Did higher education levels in a county lead to more support for Democratic candidates in the 2020 Presidential Elections?</p>
+<p>My hypothesis: I hypothesize that counties with more adults holding a bachelor’s degree or higher will vote more for Democrats, because education is typically linked to political engagement and more liberal social views.</p>
+<h2 id="description-of-data-set-and-research-question-paragraph-for-milestone-2">Description of Data Set and Research Question (paragraph for milestone 2)</h2>
+<p>For my project, I will use county level data from the U.S. Census and 2020 presidential election results. My research question is: “Did higher education levels in a county lead to more support for Democratic candidates in the 2020 Presidential Elections?” I hypothesize that counties with more adults holding a bachelor’s degree or higher will vote more for Democrats, because education is linked to political engagement and more liberal social views. My main explanatory variable will be education level, measured as the percentage of adults in a county with a bachelor’s degree or higher. This will vary across counties and states, allowing us to observe how variation impacts the dependent/outcome variable. The outcome variable will be Democratic vote share, which is measured as the percentage of total votes cast for the Democratic candidate in each county. If the patterns in the data show a positive relationship between higher education and democratic vote, my hypothesis is supported. However, if the relationship is zero or negative, rather showing a correlation between Republican vote and education, it is not supported.</p>
+<h2 id="datasets-being-used-for-project-and-code-to-load-it">Datasets being used for project and code to load it</h2>
+<p>For my project, I am using a GitHub dataset that I have loaded under “election_data” that contains election results by county from the 2020 election cycle. To understand education and literacy levels, I will use the “tidycensus” package that has census and education data by county.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>election_data</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://readr.tidyverse.org/reference/read_delim.html'>read_csv</a></span><span class='op'>(</span><span class='st'>"https://raw.githubusercontent.com/tonmcg/US_County_Level_Election_Results_08-20/master/2020_US_County_Level_Presidential_Results.csv"</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>election_data</span><span class='op'>)</span></span></code></pre>
+</div>
+<pre><code># A tibble: 6 × 10
+  state_name county_fips county_name   votes_gop votes_dem total_votes
+  &lt;chr&gt;      &lt;chr&gt;       &lt;chr&gt;             &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt;
+1 Alabama    01001       Autauga Coun…     19838      7503       27770
+2 Alabama    01003       Baldwin Coun…     83544     24578      109679
+3 Alabama    01005       Barbour Coun…      5622      4816       10518
+4 Alabama    01007       Bibb County        7525      1986        9595
+5 Alabama    01009       Blount County     24711      2640       27588
+6 Alabama    01011       Bullock Coun…      1146      3446        4613
+# ℹ 4 more variables: diff &lt;dbl&gt;, per_gop &lt;dbl&gt;, per_dem &lt;dbl&gt;,
+#   per_point_diff &lt;dbl&gt;</code></pre>
+</div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>

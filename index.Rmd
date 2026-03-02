@@ -26,13 +26,17 @@ For my project, I will use county level data from the U.S. Census and 2020 presi
 
 ## Datasets being used for project and code to load it
 
-For my project, I am using a GitHub dataset that I have loaded under "election_data" that contains election results by county from the 2020 election cycle. To understand education and literacy levels, I will use the "tidycensus" package that has census and education data by county.  
+For my project, I am using a GitHub dataset that I have loaded under "election_data" that contains election results by county from the 2020 election cycle. To understand education and literacy levels, I will use the "tidycensus" package that has census and education data by county. 
 
-```{r Loading the data}
-install.packages("tidycensus")
+```{r setup, include = FALSE}
 library(tidycensus)
 library(readr)
 library(dplyr)
+library(tidyr)
+```
+
+
+```{r Loading the data}
 
 election_data <- read_csv("https://raw.githubusercontent.com/tonmcg/US_County_Level_Election_Results_08-20/master/2020_US_County_Level_Presidential_Results.csv")
 
