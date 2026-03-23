@@ -43,3 +43,88 @@ election_data <- read_csv("https://raw.githubusercontent.com/tonmcg/US_County_Le
 head(election_data)
 ```
 
+## Cleaning and Visualizing my data (Milestone 3)
+
+```{r stepup chunk}
+library(tidycensus)
+library(readr)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+
+```
+
+Accessing education levels from the census using an API key 
+
+```{r}
+census_api_key("2de76ac2174e4c5d914da47a19564a5de7799580", install = TRUE, overwrite = TRUE)
+```
+
+Organize the values and information we want to pull from the census dataset
+
+```{r}
+edu_data <- get_acs(
+  geography = "county",
+  variables = c(
+    bachelor = "B15003_022",
+    master = "B15003_023",
+    professional = "B15003_024",
+    doctorate = "B15003_025",
+    total = "B15003_001"
+  ),
+  year = 2020,
+  survey = "acs5",
+  geometry = FALSE
+)
+```
+
+Clean the education data to be more focused and interpretable, selecting GEOID (county) and percent of the population with a bachelor's degree or higher 
+
+```{r}
+edu_clean <- edu_data |>
+  select(GEOID, variable, estimate) |>
+  pivot_wider(names_from = variable, values_from = estimate) |>
+  mutate(
+    bachelors_pct = (bachelor + master + professional + doctorate) / total * 100
+  ) |>
+  select(GEOID, bachelors_pct)
+
+head(edu_clean)
+```
+
+Clean election data by focusing on the percentage of democratic vote share and GEOID
+
+```{r}
+election_clean <- election_data |>
+  mutate(
+    total_votes = votes_dem + votes_gop,
+    dem_share = votes_dem / total_votes,
+    GEOID = county_fips
+  ) |>
+  select(GEOID, dem_share)
+
+```
+
+
+Merge the datasets together using left_join and connecting the sets via the GEOID character 
+
+
+```{r}
+merged_data <- left_join(election_clean, edu_clean, by = "GEOID")
+
+head(merged_data)
+```
+
+Produce a scatter plot that represents the relationship between democratic vote share and education rates by county 
+
+```{r}
+ggplot(merged_data, aes(x = bachelors_pct, y = dem_share)) +
+  geom_point(alpha = 0.3) +
+  geom_smooth(method = "lm", se = FALSE, color = "pink") +
+  labs(
+    title = "County Education vs Democratic Vote Share (2020)",
+    x = "Percent with Bachelor's Degree or Higher",
+    y = "Democratic Vote Share"
+  ) 
+```
+
