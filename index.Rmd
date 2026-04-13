@@ -128,3 +128,56 @@ ggplot(merged_data, aes(x = bachelors_pct, y = dem_share)) +
   ) 
 ```
 
+## Analyzing Visuals of my Data (Milestone 4)
+
+Producing a Boxplot with education groups to examine and visualize relationship between education and voting. 
+
+Step One: Creating Education Groups
+
+```{r}
+merged_data <- merged_data |>
+  mutate(
+    edu_group = ntile(bachelors_pct, 3))
+
+merged_data <- merged_data |>
+  mutate(
+    edu_group = factor(edu_group,
+                       levels = c(1, 2, 3),
+                       labels = c("Low Education", "Medium Education", "High Education"))
+  )
+```
+
+Step Two: Create Boxplot
+
+```{r}
+ggplot(merged_data, aes(x = edu_group, y = dem_share)) +
+  geom_boxplot(fill = "pink", color = "deeppink") +
+  labs(
+    title = "Democratic Vote Share by Education Level Groups",
+    x = "Education Level",
+    y = "Democratic Vote Share"
+  ) +
+  theme_minimal()
+```
+
+## Table: Democratic Vote Share in Relation to Education Level
+
+Creating a table that helps further analyze the relationship between education level and Democratic vote share
+
+```{r}
+merged_data |>
+  group_by(edu_group) |>
+  summarize(avg_dem_share = mean(dem_share, na.rm = TRUE),
+    n = n()) |>
+  rename(
+    "Education Level" = edu_group,
+    "Avg. Democratic Vote Share" = avg_dem_share,
+    "Number of Counties" = n) |>
+  knitr::kable(digits = 3, caption = "Average Democratic Vote Share by Education Group")
+```
+
+## Analysis and Discussion
+
+The results of both the boxplot and the table above show a positive relationship between higher education level and Democratic vote share. The table illustrates that counties with higher levels of education have higher average Democratic vote shares, with 0.281 in low education counties but 0.438 in high education counties. This pattern is also observed in the boxplot, which depicts higher Democratic support as education increases. 
+
+Overall, the data supports my hypothesis that more educated counties tended to vote more Democratic in the 2020 election.
