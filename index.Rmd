@@ -21,7 +21,7 @@ My hypothesis: I hypothesize that counties with more adults holding a bachelor�
 
 ## Description of Data Set and Research Question (paragraph for milestone 2)
 
-For my project, I will use county level data from the U.S. Census and 2020 presidential election results. My research question is: “Did higher education levels in a county lead to more support for Democratic candidates in the 2020 Presidential Elections?” I hypothesize that counties with more adults holding a bachelor’s degree or higher will vote more for Democrats, because education is linked to political engagement and more liberal social views. My main explanatory variable will be education level, measured as the percentage of adults in a county with a bachelor’s degree or higher. This will vary across counties and states, allowing us to observe how variation impacts the dependent/outcome variable. The outcome variable will be Democratic vote share, which is measured as the percentage of total votes cast for the Democratic candidate in each county. If the patterns in the data show a positive relationship between higher education and democratic vote, my hypothesis is supported. However, if the relationship is zero or negative, rather showing a correlation between Republican vote and education, it is not supported.
+For my project, I will use county level data from the U.S. Census and 2020 presidential election results. My research question is: **“Did higher education levels in a county lead to more support for Democratic candidates in the 2020 Presidential Elections?”**. I hypothesize that counties with more adults holding a bachelor’s degree or higher will vote more for Democrats, because education is linked to political engagement and more liberal social views. My main explanatory variable will be education level, measured as the percentage of adults in a county with a bachelor’s degree or higher. This will vary across counties and states, allowing us to observe how variation impacts the dependent/outcome variable. The outcome variable will be Democratic vote share, which is measured as the percentage of total votes cast for the Democratic candidate in each county. If the patterns in the data show a positive relationship between higher education and democratic vote, my hypothesis is supported. However, if the relationship is zero or negative, rather showing a correlation between Republican vote and education, it is not supported.
 
 
 ## Datasets being used for project and code to load it
@@ -128,6 +128,12 @@ ggplot(merged_data, aes(x = bachelors_pct, y = dem_share)) +
   ) 
 ```
 
+## Regression Analysis
+**The relationship between the percent of those with Bachelor's degrees and Democratic vote share** 
+
+The scatterplot and regression line show a **positive relationship between educational level by county and Democratic vote share in the 2020 election**. Each point represents a county, with the x-axis showing the percentage of residents who hold a bachelor’s degree or higher and the y-axis showing the Democratic share of the vote. The upward slope of the regression line indicates that counties with higher levels of education tended to give a larger share of votes to the Democratic candidate. In general, counties with lower percentages of college-educated residents were more likely to have lower Democratic vote shares, while counties with more highly educated populations were more likely to vote Democratic. However, the data points are somewhat spread out around the line, showing that education alone does not fully explain voting patterns. Other factors such as income, race, region, urbanization, and local political culture likely also influenced election outcomes. **Overall, the regression suggests that educational attainment was an important predictor of Democratic vote share in 2020**.
+
+
 ## Analyzing Visuals of my Data (Milestone 4)
 
 Producing a Boxplot with education groups to examine and visualize relationship between education and voting. 
@@ -178,6 +184,6 @@ merged_data |>
 
 ## Analysis and Discussion
 
-The results of both the boxplot and the table above show a positive relationship between higher education level and Democratic vote share. The table illustrates that counties with higher levels of education have higher average Democratic vote shares, with 0.281 in low education counties but 0.438 in high education counties. This pattern is also observed in the boxplot, which depicts higher Democratic support as education increases. 
+The results of both the boxplot and the table above show a **positive relationship between higher education level and Democratic vote share**. The table illustrates that counties with higher levels of education have higher average Democratic vote shares, with 0.281 in low education counties but 0.438 in high education counties. This pattern is also observed in the boxplot, which depicts higher Democratic support as education increases. 
 
-Overall, the data supports my hypothesis that more educated counties tended to vote more Democratic in the 2020 election.
+**Overall, the data supports my hypothesis that more educated counties tended to vote more Democratic in the 2020 election**.
