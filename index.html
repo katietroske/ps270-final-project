@@ -116,7 +116,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/figure-html5/unnamed-chunk-6-1.png","index_files/figure-html5/unnamed-chunk-8-1.png","index_files/header-attrs-2.17/header-attrs.js","index_files/header-attrs-2.30/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/figure-html5/Boxplot Code Print-1.png","index_files/figure-html5/Boxplot-1.png","index_files/figure-html5/Histogram-1.png","index_files/figure-html5/Scatterplot Code Print-1.png","index_files/figure-html5/Scatterplot-1.png","index_files/figure-html5/unnamed-chunk-6-1.png","index_files/figure-html5/unnamed-chunk-8-1.png","index_files/header-attrs-2.17/header-attrs.js","index_files/header-attrs-2.30/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
   <!--/radix_placeholder_navigation_in_header-->
@@ -1544,34 +1544,20 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </div>
 
 <div class="d-article">
-<h2 id="project-thoughts">Project thoughts</h2>
-<p>I am interested in exploring data related to statistics about literacy and education across different areas and community types, and how they compare to voting and elections. I think it would be interesting to study the correlation between literacy levels and political party affiliation/candidate preference.</p>
-<h2 id="research-question-and-hypothesis">Research Question and Hypothesis</h2>
-<p>Question to be researched and studied in the data: Did higher education levels in a county lead to more support for Democratic candidates in the 2020 Presidential Elections?</p>
-<p>My hypothesis: I hypothesize that counties with more adults holding a bachelor’s degree or higher will vote more for Democrats, because education is typically linked to political engagement and more liberal social views.</p>
-<h2 id="description-of-data-set-and-research-question-paragraph-for-milestone-2">Description of Data Set and Research Question (paragraph for milestone 2)</h2>
-<p>For my project, I will use county level data from the U.S. Census and 2020 presidential election results. My research question is: <strong>“Did higher education levels in a county lead to more support for Democratic candidates in the 2020 Presidential Elections?”</strong>. I hypothesize that counties with more adults holding a bachelor’s degree or higher will vote more for Democrats, because education is linked to political engagement and more liberal social views. My main explanatory variable will be education level, measured as the percentage of adults in a county with a bachelor’s degree or higher. This will vary across counties and states, allowing us to observe how variation impacts the dependent/outcome variable. The outcome variable will be Democratic vote share, which is measured as the percentage of total votes cast for the Democratic candidate in each county. If the patterns in the data show a positive relationship between higher education and democratic vote, my hypothesis is supported. However, if the relationship is zero or negative, rather showing a correlation between Republican vote and education, it is not supported.</p>
-<h2 id="datasets-being-used-for-project-and-code-to-load-it">Datasets being used for project and code to load it</h2>
-<p>For my project, I am using a GitHub dataset that I have loaded under “election_data” that contains election results by county from the 2020 election cycle. To understand education and literacy levels, I will use the “tidycensus” package that has census and education data by county.</p>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>election_data</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://readr.tidyverse.org/reference/read_delim.html'>read_csv</a></span><span class='op'>(</span><span class='st'>"https://raw.githubusercontent.com/tonmcg/US_County_Level_Election_Results_08-20/master/2020_US_County_Level_Presidential_Results.csv"</span><span class='op'>)</span></span>
-<span></span>
-<span><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>election_data</span><span class='op'>)</span></span></code></pre>
-</div>
-<pre><code># A tibble: 6 × 10
-  state_name county_fips county_name   votes_gop votes_dem total_votes
-  &lt;chr&gt;      &lt;chr&gt;       &lt;chr&gt;             &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt;
-1 Alabama    01001       Autauga Coun…     19838      7503       27770
-2 Alabama    01003       Baldwin Coun…     83544     24578      109679
-3 Alabama    01005       Barbour Coun…      5622      4816       10518
-4 Alabama    01007       Bibb County        7525      1986        9595
-5 Alabama    01009       Blount County     24711      2640       27588
-6 Alabama    01011       Bullock Coun…      1146      3446        4613
-# ℹ 4 more variables: diff &lt;dbl&gt;, per_gop &lt;dbl&gt;, per_dem &lt;dbl&gt;,
-#   per_point_diff &lt;dbl&gt;</code></pre>
-</div>
-<h2 id="cleaning-and-visualizing-my-data-milestone-3">Cleaning and Visualizing my data (Milestone 3)</h2>
+<h2 id="introduction">Introduction</h2>
+<p>For my final Political Science 270 project, I chose to explore data and statistics that analyze the relationship between education rates and election/voting outcomes. This topic is of interest because the correlation between education and political party affiliation presents a new perspective on voting behavior in the United States, and allows us to make observations about elections and voters. Further, I chose to examine Democratic vote share specifically because those with higher education are often more socially and politically engaged, which is also reflected in Democratic/liberal values. By examining this relationship at the county level, this project aims to identify whether education is a meaningful predictor of Democratic vote share.</p>
+<p><strong>Research Question and Hypothesis</strong></p>
+<p>My research question is: Did higher education levels in a county lead to more support for Democratic candidates in the 2020 Presidential Elections?</p>
+<p>My hypothesis: I hypothesize that counties with a higher percentage of adults holding a bachelor’s degree or higher will have a higher Democratic vote share in the 2020 election.</p>
+<h2 id="description-of-data-set-and-research-question">Description of Data Set and Research Question</h2>
+<p>The key dependent variable is <strong>Democratic vote share</strong>, which is measured using official county-level election results from the 2020 U.S. presidential election. Specifically, it is calculated as the percentage of total votes in each county that were cast for the Democratic candidate. This is measured from administrative voting data.</p>
+<p>The key independent variable is <strong>education level</strong>, measured as the percentage of adults in each county who hold a bachelor’s degree or higher. This data comes from the U.S. Census, accessed through the tidycensus package and an API Key, and is based on large-scale survey data collected by the Census Bureau.</p>
+<p>My main <strong>explanatory variable</strong> will be education level, measured as the percentage of adults in a county with a bachelor’s degree or higher. This will vary across counties and states, allowing us to observe how variation impacts the dependent/outcome variable. The <strong>outcome variable</strong> will be Democratic vote share, which is measured as the percentage of total votes cast for the Democratic candidate in each county. If the patterns in the data show a positive relationship between higher education and democratic vote, my hypothesis is supported. However, if the relationship is zero or negative, rather showing a correlation between Republican vote and education, it is not supported.</p>
+<p><strong>Research Design</strong></p>
+<p>This project uses a cross-sectional research design, as it analyzes county-level data from a single point in time (the 2020 presidential election). The data come from two primary sources: county-level demographic data from the U.S. Census, and county-level election results from a public GitHub dataset containing official 2020 presidential vote totals. To conduct my analysis of both datasets, I <strong>merged them by county</strong>, allowing for comparison between education levels and voting outcomes across the United States.</p>
+<p><strong>Analyzing my hypothesis</strong></p>
+<p>To evaluate the hypothesis, I examine whether higher levels of educational attainment are associated with higher Democratic vote share. The hypothesis will be supported if there is a positive relationship between the percentage of college-educated adults and Democratic vote share, as shown through various forms of statistical analysis and visual patterns in the data. However, if the relationship is zero or negative, rather showing a correlation between Republican vote and education, my hypothesis is not supported.</p>
+<h2 id="visualizations-and-analysis">Visualizations and analysis</h2>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://walker-data.com/tidycensus/'>tidycensus</a></span><span class='op'>)</span></span>
@@ -1581,10 +1567,118 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://ggplot2.tidyverse.org'>ggplot2</a></span><span class='op'>)</span></span></code></pre>
 </div>
 </div>
-<p>Accessing education levels from the census using an API key</p>
+<strong>Histogram that depicts and summarizes my dependent variable.</strong>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'><a href='https://walker-data.com/tidycensus/reference/census_api_key.html'>census_api_key</a></span><span class='op'>(</span><span class='st'>"2de76ac2174e4c5d914da47a19564a5de7799580"</span>, install <span class='op'>=</span> <span class='cn'>TRUE</span>, overwrite <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span></code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://ggplot2.tidyverse.org'>ggplot2</a></span><span class='op'>)</span></span>
+<span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>election_clean</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>dem_share</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_histogram.html'>geom_histogram</a></span><span class='op'>(</span>bins <span class='op'>=</span> <span class='fl'>30</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span></span>
+<span>    title <span class='op'>=</span> <span class='st'>"Distribution of Democratic Vote Share (2020)"</span>,</span>
+<span>    x <span class='op'>=</span> <span class='st'>"Democratic Vote Share"</span>,</span>
+<span>    y <span class='op'>=</span> <span class='st'>"Number of Counties"</span></span>
+<span>  <span class='op'>)</span></span></code></pre>
+</div>
+<p><img src="index_files/figure-html5/Histogram-1.png" alt="" width="624" /></p>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>merged_data</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>bachelors_pct</span>, y <span class='op'>=</span> <span class='va'>dem_share</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span>alpha <span class='op'>=</span> <span class='fl'>0.3</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_smooth.html'>geom_smooth</a></span><span class='op'>(</span>method <span class='op'>=</span> <span class='st'>"lm"</span>, se <span class='op'>=</span> <span class='cn'>FALSE</span>, color <span class='op'>=</span> <span class='st'>"pink"</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span></span>
+<span>    title <span class='op'>=</span> <span class='st'>"County Education vs Democratic Vote Share (2020)"</span>,</span>
+<span>    x <span class='op'>=</span> <span class='st'>"Percent with Bachelor's Degree or Higher"</span>,</span>
+<span>    y <span class='op'>=</span> <span class='st'>"Democratic Vote Share"</span></span>
+<span>  <span class='op'>)</span> </span></code></pre>
+</div>
+<p><img src="index_files/figure-html5/Scatterplot-1.png" alt="" width="624" /></p>
+</div>
+<p><strong>Analysis of the scatterplot and relationship</strong></p>
+<p>The scatterplot and regression line show a <strong>positive relationship between educational level by county and Democratic vote share in the 2020 election</strong>. Each point represents a county, with the x-axis showing the percentage of residents who hold a bachelor’s degree or higher and the y-axis showing the Democratic share of the vote. The upward slope of the regression line indicates that counties with higher levels of education tended to give a larger share of votes to the Democratic candidate. In general, counties with lower percentages of college-educated residents were more likely to have lower Democratic vote shares, while counties with more highly educated populations were more likely to vote Democratic. However, the data points are somewhat spread out around the line, showing that education alone does not fully explain voting patterns. Other factors such as income, race, region, urbanization, and local political culture likely also influenced election outcomes. <strong>Overall, the regression suggests that educational attainment was an important predictor of Democratic vote share in 2020</strong>.</p>
+<strong>Regression</strong>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>dem_share</span> <span class='op'>~</span> <span class='va'>bachelors_pct</span>, data <span class='op'>=</span> <span class='va'>merged_data</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span></span></code></pre>
+</div>
+<pre><code>
+Call:
+lm(formula = dem_share ~ bachelors_pct, data = merged_data)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.50118 -0.09124 -0.02012  0.07351  0.66902 
+
+Coefficients:
+               Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)   0.1373922  0.0062772   21.89   &lt;2e-16 ***
+bachelors_pct 0.0089131  0.0002551   34.94   &lt;2e-16 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 0.1383 on 3110 degrees of freedom
+  (40 observations deleted due to missingness)
+Multiple R-squared:  0.2819,    Adjusted R-squared:  0.2817 
+F-statistic:  1221 on 1 and 3110 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<p><strong>Regression Analysis</strong>
+The regression results show a clear positive relationship between education and Democratic vote share. The coefficient for bachelor’s degree attainment is 0.0089, which means that for every 1 percentage point increase in the share of adults with a bachelor’s degree or higher in a county, Democratic vote share increases by about 0.009. In simple terms, counties with more college-educated residents tend to give more votes to the Democratic candidate. This result is highly statistically significant (p &lt; 0.001), which means we can be very confident that this pattern is real and not due to random chance. Overall, the model explains about 28% of the differences in Democratic vote share across counties, showing that education is an important factor in explaining voting behavior.</p>
+<p><strong>The relationship between the percent of those with Bachelor’s degrees and Democratic vote share</strong></p>
+<p>The scatterplot and regression line show a <strong>positive relationship between educational level by county and Democratic vote share in the 2020 election</strong>. Each point represents a county, with the x-axis showing the percentage of residents who hold a bachelor’s degree or higher and the y-axis showing the Democratic share of the vote. The upward slope of the regression line indicates that counties with higher levels of education tended to give a larger share of votes to the Democratic candidate. In general, counties with lower percentages of college-educated residents were more likely to have lower Democratic vote shares, while counties with more highly educated populations were more likely to vote Democratic. However, the data points are somewhat spread out around the line, showing that education alone does not fully explain voting patterns. Other factors such as income, race, region, urbanization, and local political culture likely also influenced election outcomes. <strong>Overall, the regression suggests that educational attainment was an important predictor of Democratic vote share in 2020</strong>.</p>
+<p><strong>Further visualization of the relationship between Democratic vote share and education level</strong></p>
+<p>Producing a Boxplot with education groups to examine and visualize relationship between education and voting.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>merged_data</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>edu_group</span>, y <span class='op'>=</span> <span class='va'>dem_share</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_boxplot.html'>geom_boxplot</a></span><span class='op'>(</span>fill <span class='op'>=</span> <span class='st'>"pink"</span>, color <span class='op'>=</span> <span class='st'>"deeppink"</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span></span>
+<span>    title <span class='op'>=</span> <span class='st'>"Democratic Vote Share by Education Level Groups"</span>,</span>
+<span>    x <span class='op'>=</span> <span class='st'>"Education Level"</span>,</span>
+<span>    y <span class='op'>=</span> <span class='st'>"Democratic Vote Share"</span></span>
+<span>  <span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_minimal</a></span><span class='op'>(</span><span class='op'>)</span></span></code></pre>
+</div>
+<p><img src="index_files/figure-html5/Boxplot-1.png" alt="" width="624" /></p>
+</div>
+<h2 id="table-democratic-vote-share-in-relation-to-education-level">Table: Democratic Vote Share in Relation to Education Level</h2>
+<p>Creating a table that helps further analyze the relationship between education level and Democratic vote share</p>
+<p><strong>Analysis and Discussion</strong></p>
+<p>The results of both the boxplot and the table above show a <strong>positive relationship between higher education level and Democratic vote share</strong>. The table illustrates that counties with higher levels of education have higher average Democratic vote shares, with 0.281 in low education counties but 0.438 in high education counties. This pattern is also observed in the boxplot, which depicts higher Democratic support as education increases.</p>
+<p><strong>Overall, the data supports my hypothesis that more educated counties tended to vote more Democratic in the 2020 election</strong>.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>Overall, the results <strong>support my hypothesis that counties with higher levels of education tend to have higher Democratic vote share in the 2020 presidential election</strong>. The regression shows a positive and statistically significant relationship between the percentage of adults with a bachelor’s degree and Democratic vote share, suggesting that education is an important predictor of voting patterns. However, there are several limitations to this analysis. Because the data are cross-sectional, we cannot make strong causal claims, and there are likely other important factors– such as income, race, urbanization, and regional differences– that are not included in the model but may also influence voting behavior. There is also the possibility of unseen variable bias and measurement limitations in using county-level averages. If I had more time and resources, this analysis could be improved by including additional control variables such as income, race, and urbanization to examine other confounding variables. Further, incorporating more detailed individual-level survey data to better isolate the relationship between education and voting behavior and reduce issues of omitted variable bias.</p>
+<h2 id="coding-section">Coding section</h2>
+<p>Here is a full breakdown containing all the code I ran to produce my visualizations and analyses.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://walker-data.com/tidycensus/'>tidycensus</a></span><span class='op'>)</span></span>
+<span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://readr.tidyverse.org'>readr</a></span><span class='op'>)</span></span>
+<span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://dplyr.tidyverse.org'>dplyr</a></span><span class='op'>)</span></span>
+<span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidyr.tidyverse.org'>tidyr</a></span><span class='op'>)</span></span>
+<span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://ggplot2.tidyverse.org'>ggplot2</a></span><span class='op'>)</span></span></code></pre>
+</div>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>election_data</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://readr.tidyverse.org/reference/read_delim.html'>read_csv</a></span><span class='op'>(</span><span class='st'>"https://raw.githubusercontent.com/</span></span>
+<span><span class='st'>                          tonmcg/US_County_Level_Election_Results_08-20/master/</span></span>
+<span><span class='st'>                          2020_US_County_Level_Presidential_Results.csv"</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>election_data</span><span class='op'>)</span></span></code></pre>
+</div>
+<pre><code># A tibble: 2 × 1
+  `https://raw.githubusercontent.com/`                 
+  &lt;chr&gt;                                                
+1 tonmcg/US_County_Level_Election_Results_08-20/master/
+2 2020_US_County_Level_Presidential_Results.csv        </code></pre>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='co'>#Accessing education levels from the census using an API key </span></span>
+<span></span>
+<span><span class='fu'><a href='https://walker-data.com/tidycensus/reference/census_api_key.html'>census_api_key</a></span><span class='op'>(</span><span class='st'>"2de76ac2174e4c5d914da47a19564a5de7799580"</span>, install <span class='op'>=</span> <span class='cn'>TRUE</span>, overwrite <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span></code></pre>
 </div>
 <pre><code>[1] &quot;2de76ac2174e4c5d914da47a19564a5de7799580&quot;</code></pre>
 </div>
@@ -1629,18 +1723,6 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 5 01009          13.3
 6 01011          10.3</code></pre>
 </div>
-<p>Clean election data by focusing on the percentage of democratic vote share and GEOID</p>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>election_clean</span> <span class='op'>&lt;-</span> <span class='va'>election_data</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span></span>
-<span>    total_votes <span class='op'>=</span> <span class='va'>votes_dem</span> <span class='op'>+</span> <span class='va'>votes_gop</span>,</span>
-<span>    dem_share <span class='op'>=</span> <span class='va'>votes_dem</span> <span class='op'>/</span> <span class='va'>total_votes</span>,</span>
-<span>    GEOID <span class='op'>=</span> <span class='va'>county_fips</span></span>
-<span>  <span class='op'>)</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>GEOID</span>, <span class='va'>dem_share</span><span class='op'>)</span></span></code></pre>
-</div>
-</div>
 <p>Merge the datasets together using left_join and connecting the sets via the GEOID character</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
@@ -1670,12 +1752,8 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <span>    y <span class='op'>=</span> <span class='st'>"Democratic Vote Share"</span></span>
 <span>  <span class='op'>)</span> </span></code></pre>
 </div>
-<p><img src="index_files/figure-html5/unnamed-chunk-6-1.png" alt="" width="624" /></p>
+<p><img src="index_files/figure-html5/Scatterplot%20Code%20Print-1.png" alt="" width="624" /></p>
 </div>
-<h2 id="regression-analysis">Regression Analysis</h2>
-<p><strong>The relationship between the percent of those with Bachelor’s degrees and Democratic vote share</strong></p>
-<p>The scatterplot and regression line show a <strong>positive relationship between educational level by county and Democratic vote share in the 2020 election</strong>. Each point represents a county, with the x-axis showing the percentage of residents who hold a bachelor’s degree or higher and the y-axis showing the Democratic share of the vote. The upward slope of the regression line indicates that counties with higher levels of education tended to give a larger share of votes to the Democratic candidate. In general, counties with lower percentages of college-educated residents were more likely to have lower Democratic vote shares, while counties with more highly educated populations were more likely to vote Democratic. However, the data points are somewhat spread out around the line, showing that education alone does not fully explain voting patterns. Other factors such as income, race, region, urbanization, and local political culture likely also influenced election outcomes. <strong>Overall, the regression suggests that educational attainment was an important predictor of Democratic vote share in 2020</strong>.</p>
-<h2 id="analyzing-visuals-of-my-data-milestone-4">Analyzing Visuals of my Data (Milestone 4)</h2>
 <p>Producing a Boxplot with education groups to examine and visualize relationship between education and voting.</p>
 <p>Step One: Creating Education Groups</p>
 <div class="layout-chunk" data-layout="l-body">
@@ -1704,9 +1782,8 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <span>  <span class='op'>)</span> <span class='op'>+</span></span>
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_minimal</a></span><span class='op'>(</span><span class='op'>)</span></span></code></pre>
 </div>
-<p><img src="index_files/figure-html5/unnamed-chunk-8-1.png" alt="" width="624" /></p>
+<p><img src="index_files/figure-html5/Boxplot%20Code%20Print-1.png" alt="" width="624" /></p>
 </div>
-<h2 id="table-democratic-vote-share-in-relation-to-education-level">Table: Democratic Vote Share in Relation to Education Level</h2>
 <p>Creating a table that helps further analyze the relationship between education level and Democratic vote share</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
@@ -1721,7 +1798,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <span>  <span class='fu'>knitr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span>digits <span class='op'>=</span> <span class='fl'>3</span>, caption <span class='op'>=</span> <span class='st'>"Average Democratic Vote Share by Education Group"</span><span class='op'>)</span></span></code></pre>
 </div>
 <table>
-<caption><span id="tab:unnamed-chunk-9">Table 1: </span>Average Democratic Vote Share by Education Group</caption>
+<caption>(#tab:Table Code Print)Average Democratic Vote Share by Education Group</caption>
 <thead>
 <tr class="header">
 <th style="text-align: left;">Education Level</th>
@@ -1753,10 +1830,34 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </tbody>
 </table>
 </div>
-<h2 id="analysis-and-discussion">Analysis and Discussion</h2>
-<p>The results of both the boxplot and the table above show a <strong>positive relationship between higher education level and Democratic vote share</strong>. The table illustrates that counties with higher levels of education have higher average Democratic vote shares, with 0.281 in low education counties but 0.438 in high education counties. This pattern is also observed in the boxplot, which depicts higher Democratic support as education increases.</p>
-<p><strong>Overall, the data supports my hypothesis that more educated counties tended to vote more Democratic in the 2020 election</strong>.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+Creating a regression model
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>dem_share</span> <span class='op'>~</span> <span class='va'>bachelors_pct</span>, data <span class='op'>=</span> <span class='va'>merged_data</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span></span></code></pre>
+</div>
+<pre><code>
+Call:
+lm(formula = dem_share ~ bachelors_pct, data = merged_data)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.50118 -0.09124 -0.02012  0.07351  0.66902 
+
+Coefficients:
+               Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)   0.1373922  0.0062772   21.89   &lt;2e-16 ***
+bachelors_pct 0.0089131  0.0002551   34.94   &lt;2e-16 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 0.1383 on 3110 degrees of freedom
+  (40 observations deleted due to missingness)
+Multiple R-squared:  0.2819,    Adjusted R-squared:  0.2817 
+F-statistic:  1221 on 1 and 3110 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
