@@ -9,34 +9,46 @@ output:
 
 
 
-## Project thoughts
+## Introduction
 
-I am interested in exploring data related to statistics about literacy and education across different areas and community types, and how they compare to voting and elections. I think it would be interesting to study the correlation between literacy levels and political party affiliation/candidate preference.
+For my final Political Science 270 project, I chose to explore data and statistics that analyze the relationship between education rates and election/voting outcomes. This topic is of interest because the correlation between education and political party affiliation presents a new perspective on voting behavior in the United States, and allows us to make observations about elections and voters. Further, I chose to examine Democratic vote share specifically because those with higher education are often more socially and politically engaged, which is also reflected in Democratic/liberal values. By examining this relationship at the county level, this project aims to identify whether education is a meaningful predictor of Democratic vote share.
 
-## Research Question and Hypothesis
+**Research Question and Hypothesis**
 
-Question to be researched and studied in the data: Did higher education levels in a county lead to more support for Democratic candidates in the 2020 Presidential Elections?
+My research question is: Did higher education levels in a county lead to more support for Democratic candidates in the 2020 Presidential Elections?
 
-My hypothesis: I hypothesize that counties with more adults holding a bachelor’s degree or higher will vote more for Democrats, because education is typically linked to political engagement and more liberal social views. 
+My hypothesis: I hypothesize that counties with a higher percentage of adults holding a bachelor’s degree or higher will have a higher Democratic vote share in the 2020 election.
 
-## Description of Data Set and Research Question (paragraph for milestone 2)
+## Description of Data Set and Research Question
 
-For my project, I will use county level data from the U.S. Census and 2020 presidential election results. My research question is: **“Did higher education levels in a county lead to more support for Democratic candidates in the 2020 Presidential Elections?”**. I hypothesize that counties with more adults holding a bachelor’s degree or higher will vote more for Democrats, because education is linked to political engagement and more liberal social views. My main explanatory variable will be education level, measured as the percentage of adults in a county with a bachelor’s degree or higher. This will vary across counties and states, allowing us to observe how variation impacts the dependent/outcome variable. The outcome variable will be Democratic vote share, which is measured as the percentage of total votes cast for the Democratic candidate in each county. If the patterns in the data show a positive relationship between higher education and democratic vote, my hypothesis is supported. However, if the relationship is zero or negative, rather showing a correlation between Republican vote and education, it is not supported.
+The key dependent variable is **Democratic vote share**, which is measured using official county-level election results from the 2020 U.S. presidential election. Specifically, it is calculated as the percentage of total votes in each county that were cast for the Democratic candidate. This is measured from administrative voting data. 
 
+The key independent variable is **education level**, measured as the percentage of adults in each county who hold a bachelor’s degree or higher. This data comes from the U.S. Census, accessed through the tidycensus package and an API Key, and is based on large-scale survey data collected by the Census Bureau. 
 
-## Datasets being used for project and code to load it
+My main **explanatory variable** will be education level, measured as the percentage of adults in a county with a bachelor’s degree or higher. This will vary across counties and states, allowing us to observe how variation impacts the dependent/outcome variable. The **outcome variable** will be Democratic vote share, which is measured as the percentage of total votes cast for the Democratic candidate in each county. If the patterns in the data show a positive relationship between higher education and democratic vote, my hypothesis is supported. However, if the relationship is zero or negative, rather showing a correlation between Republican vote and education, it is not supported.
 
-For my project, I am using a GitHub dataset that I have loaded under "election_data" that contains election results by county from the 2020 election cycle. To understand education and literacy levels, I will use the "tidycensus" package that has census and education data by county. 
+**Research Design**
+This project uses a cross-sectional research design, as it analyzes county-level data from a single point in time (the 2020 presidential election). The data come from two primary sources: county-level demographic data from the U.S. Census, and county-level election results from a public GitHub dataset containing official 2020 presidential vote totals. To conduct my analysis of both datasets, I **merged them by county**, allowing for comparison between education levels and voting outcomes across the United States.
 
-```{r setup, include = FALSE}
-library(tidycensus)
-library(readr)
-library(dplyr)
-library(tidyr)
+**Analyzing my hypothesis**
+To evaluate the hypothesis, I examine whether higher levels of educational attainment are associated with higher Democratic vote share. The hypothesis will be supported if there is a positive relationship between the percentage of college-educated adults and Democratic vote share, as shown through various forms of statistical analysis and visual patterns in the data. However, if the relationship is zero or negative, rather showing a correlation between Republican vote and education, my hypothesis is not supported.
+
+**Histogram to summarize the dependent variable**
+```{r Histogram}
+ggplot(election_clean, aes(x = dem_share)) +
+  geom_histogram(bins = 30) +
+  labs(
+    title = "Distribution of Democratic Vote Share (2020)",
+    x = "Democratic Vote Share",
+    y = "Number of Counties"
+  )
 ```
 
 
-```{r Loading the data}
+
+
+
+```{r Loading the data, include = FALSE}
 
 election_data <- read_csv("https://raw.githubusercontent.com/tonmcg/US_County_Level_Election_Results_08-20/master/2020_US_County_Level_Presidential_Results.csv")
 
@@ -45,7 +57,7 @@ head(election_data)
 
 ## Cleaning and Visualizing my data (Milestone 3)
 
-```{r stepup chunk}
+```{r stepup chunk, include = FALSE}
 library(tidycensus)
 library(readr)
 library(dplyr)
@@ -56,13 +68,13 @@ library(ggplot2)
 
 Accessing education levels from the census using an API key 
 
-```{r}
+```{r, include = FALSE}
 census_api_key("2de76ac2174e4c5d914da47a19564a5de7799580", install = TRUE, overwrite = TRUE)
 ```
 
 Organize the values and information we want to pull from the census dataset
 
-```{r}
+```{r, include = FALSE}
 edu_data <- get_acs(
   geography = "county",
   variables = c(
@@ -78,9 +90,10 @@ edu_data <- get_acs(
 )
 ```
 
+
 Clean the education data to be more focused and interpretable, selecting GEOID (county) and percent of the population with a bachelor's degree or higher 
 
-```{r}
+```{r, include = FALSE}
 edu_clean <- edu_data |>
   select(GEOID, variable, estimate) |>
   pivot_wider(names_from = variable, values_from = estimate) |>
@@ -94,7 +107,7 @@ head(edu_clean)
 
 Clean election data by focusing on the percentage of democratic vote share and GEOID
 
-```{r}
+```{r, include = FALSE}
 election_clean <- election_data |>
   mutate(
     total_votes = votes_dem + votes_gop,
@@ -109,7 +122,7 @@ election_clean <- election_data |>
 Merge the datasets together using left_join and connecting the sets via the GEOID character 
 
 
-```{r}
+```{r, include = FALSE}
 merged_data <- left_join(election_clean, edu_clean, by = "GEOID")
 
 head(merged_data)
@@ -140,7 +153,7 @@ Producing a Boxplot with education groups to examine and visualize relationship 
 
 Step One: Creating Education Groups
 
-```{r}
+```{r, include = FALSE}
 merged_data <- merged_data |>
   mutate(
     edu_group = ntile(bachelors_pct, 3))
@@ -187,3 +200,136 @@ merged_data |>
 The results of both the boxplot and the table above show a **positive relationship between higher education level and Democratic vote share**. The table illustrates that counties with higher levels of education have higher average Democratic vote shares, with 0.281 in low education counties but 0.438 in high education counties. This pattern is also observed in the boxplot, which depicts higher Democratic support as education increases. 
 
 **Overall, the data supports my hypothesis that more educated counties tended to vote more Democratic in the 2020 election**.
+
+
+
+
+
+
+
+
+
+## Coding section
+Here is a full breakdown containing all the code I ran to produce my visualizations and analyses. 
+## Datasets being used for project and code to load it
+
+```{r Setup Chunk}
+library(tidycensus)
+library(readr)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+```
+
+```{r Loading the data}
+
+election_data <- read_csv("https://raw.githubusercontent.com/
+                          tonmcg/US_County_Level_Election_Results_08-20/master/
+                          2020_US_County_Level_Presidential_Results.csv")
+
+head(election_data)
+```
+
+```{r Accessing Census Data}
+#Accessing education levels from the census using an API key 
+
+census_api_key("2de76ac2174e4c5d914da47a19564a5de7799580", install = TRUE, overwrite = TRUE)
+```
+
+Organize the values and information we want to pull from the census dataset
+
+```{r Organizing values}
+edu_data <- get_acs(
+  geography = "county",
+  variables = c(
+    bachelor = "B15003_022",
+    master = "B15003_023",
+    professional = "B15003_024",
+    doctorate = "B15003_025",
+    total = "B15003_001"
+  ),
+  year = 2020,
+  survey = "acs5",
+  geometry = FALSE
+)
+```
+
+Clean the education data to be more focused and interpretable, selecting GEOID (county) and percent of the population with a bachelor's degree or higher 
+
+```{r Cleaning education data}
+edu_clean <- edu_data |>
+  select(GEOID, variable, estimate) |>
+  pivot_wider(names_from = variable, values_from = estimate) |>
+  mutate(
+    bachelors_pct = (bachelor + master + professional + doctorate) / total * 100
+  ) |>
+  select(GEOID, bachelors_pct)
+
+head(edu_clean)
+```
+
+Merge the datasets together using left_join and connecting the sets via the GEOID character 
+
+
+```{r Merging data}
+merged_data <- left_join(election_clean, edu_clean, by = "GEOID")
+
+head(merged_data)
+```
+
+Produce a scatter plot that represents the relationship between democratic vote share and education rates by county 
+
+```{r Scatterplot}
+ggplot(merged_data, aes(x = bachelors_pct, y = dem_share)) +
+  geom_point(alpha = 0.3) +
+  geom_smooth(method = "lm", se = FALSE, color = "pink") +
+  labs(
+    title = "County Education vs Democratic Vote Share (2020)",
+    x = "Percent with Bachelor's Degree or Higher",
+    y = "Democratic Vote Share"
+  ) 
+```
+
+Producing a Boxplot with education groups to examine and visualize relationship between education and voting. 
+
+Step One: Creating Education Groups
+
+```{r Creating education groups}
+merged_data <- merged_data |>
+  mutate(
+    edu_group = ntile(bachelors_pct, 3))
+
+merged_data <- merged_data |>
+  mutate(
+    edu_group = factor(edu_group,
+                       levels = c(1, 2, 3),
+                       labels = c("Low Education", "Medium Education", "High Education"))
+  )
+```
+
+Step Two: Create Boxplot
+
+```{r Boxplot}
+ggplot(merged_data, aes(x = edu_group, y = dem_share)) +
+  geom_boxplot(fill = "pink", color = "deeppink") +
+  labs(
+    title = "Democratic Vote Share by Education Level Groups",
+    x = "Education Level",
+    y = "Democratic Vote Share"
+  ) +
+  theme_minimal()
+```
+
+Creating a table that helps further analyze the relationship between education level and Democratic vote share
+
+```{r Table}
+merged_data |>
+  group_by(edu_group) |>
+  summarize(avg_dem_share = mean(dem_share, na.rm = TRUE),
+    n = n()) |>
+  rename(
+    "Education Level" = edu_group,
+    "Avg. Democratic Vote Share" = avg_dem_share,
+    "Number of Counties" = n) |>
+  knitr::kable(digits = 3, caption = "Average Democratic Vote Share by Education Group")
+```
