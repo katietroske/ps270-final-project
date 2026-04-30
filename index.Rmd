@@ -12,6 +12,7 @@ library(dplyr)
 library(tidyr)
 library(ggplot2)
 library(tidycensus)
+library(knitr)
 ```
 
 
@@ -143,7 +144,15 @@ The scatterplot and regression line show a **positive relationship between educa
 ```{r Regression Model}
 model <- lm(dem_share ~ bachelors_pct, data = merged_data)
 
-summary(model)
+reg_table <- data.frame(
+  Term = c("Intercept", "Bachelor's %"),
+  Estimate = c(0.1373922, 0.0089131),
+  Std_Error = c(0.0062772, 0.0002551),
+  t_value = c(21.89, 34.94),
+  p_value = c("<2e-16", "<2e-16")
+)
+
+kable(reg_table, caption = "Regression Results: Education and Democratic Vote Share")
 ```
 
 
